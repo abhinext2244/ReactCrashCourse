@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JSX and Babel</title>
+  </head>
+  <body>
+    <!-- container where the React element will be render -->
+    <div id="root"></div>
+    <!-- include React and ReactDOM -->
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <!-- inclued Babel for JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      // Your JSX code here
+    //   simple Jsx syntax
+    const el= <p>Size the day</p>; //create simple jsx represting the paragraph with the text size the day
+    ReactDOM.createRoot(document.getElementById("root")).render(el)//Render the jsx element inside the div with the id "root"
+    // Dynamic Content in JSX
+      let day="Seize the day" //Define the javascript variable with Dynamic content
+      const ele=(
+        <p>{day}</p> //create a Jsx element using Dynamic content variable
+      )
+      ReactDOM.createRoot(document.getElementById("root")).render(ele)//Render the Jsx element inside the div with he id "root"
+      //   Conditional Rendering in JSX
+      let Conditional=true//Define the boolen variable represting the condition for conditional rendering
+      const element=(
+        //use a tenary operator to conditionally render one of the pargraphs based on the condition variable
+          Conditional?<p>Pargraph1</p>:<p>Pargraph2</p>
+        )
+        ReactDOM.createRoot(document.getElementById("root")).render(element)//Rendet the jsx element insisid the dive with id "root"
+    </script>
+  </body>
+</html>
