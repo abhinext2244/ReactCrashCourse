@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Template</title>
+  </head>
+  <body>
+    <!-- container where the React Element will be render -->
+    <div id="root"></div>
+  </body>
+  <!-- include React and ReactDOM libraries -->
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <!-- include Babel for Jsx transformation -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your task starts here
+    // create React Element represting paragraph with Seize the day
+    const ele=React.createElement("p",null,"Seize  the day")
+    // Render the created React Element into HTML document
+    // by mounting it into container with the id root
+    let reactroot=ReactDOM.createRoot(document.querySelector("#root")).render(ele)
+  </script>
+</html>
