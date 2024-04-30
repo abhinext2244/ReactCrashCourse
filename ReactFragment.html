@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JSX and Babel</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        // Your JSX code here
+        //Define React component named App
+        const App=function(){
+            // Use a React Fragment to wrap multiple elements wihtout adding an extra Dom node
+            return (
+              <>
+               {/* Paragraph element with the text "React is a JavaScript library" */} 
+               <p>React is a JavaScript library</p>
+                {/*div element with class main*/}
+               <div className="main" style={{border:"1px solid black",padding:"10px",margin:"10px"}}>
+                {/* Pargraph element with text and button*/}
+                <p>Click the below button to alert 'Hello</p>
+                {/*Button with Onclick event handler to trigger an alert*/}
+                <button onClick={()=>{alert("Hello")}}>Alert Hello</button>
+                </div>
+              </>
+            );
+        };
+        //Render App Componment into root div
+        ReactDOM.createRoot(document.querySelector("#root")).render(<App/>)
+    </script>
+  </body>
+</html>
