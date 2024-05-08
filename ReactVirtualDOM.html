@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic List Rendering</title>
+  <style>
+   
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <!-- include Babel for Jsx transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your ItemList component code will go here
+//    Define Your React Components here
+// Gallery Components contain img
+    function Gallery({children}){
+      
+        return(
+            <div style={{display:"flex"}}>
+                {children}
+                </div>
+        )
+    }
+    // App Component main entry point
+    function App(){
+        return(
+            <>
+             {/*Render Gallery component*/}
+            <Gallery>
+                <div style={{display:"flex",width:"300px",height:"400px"}}>
+                    {/*Image within Gallery*/}
+                    <img src="https://media.istockphoto.com/id/1869943345/photo/planet-earth-in-the-hands-of-a-man-against-the-background-of-the-lights-of-the-evening-city.jpg?s=2048x2048&w=is&k=20&c=DJUXdKSKNtZanQGK0FZkCCYZJlfmO6mLiZECRpd-Pj0=" alt=""/>
+                    <img src="https://media.istockphoto.com/id/1575126031/photo/mid-aged-business-man-working-on-laptop-computer-in-office-writing-notes.jpg?s=2048x2048&w=is&k=20&c=U26NmzAcHY4sK5bhjYBJHdXjDGboLXdf7bnX3HVXcTM=" alt=""/>
+                    </div>
+                    </Gallery>
+            </>
+        )
+    }
+    //Render the App component into root element
+    ReactDOM.createRoot(document.querySelector('#root')).render(<App/>)
+  </script>
+</body>
+</html>
