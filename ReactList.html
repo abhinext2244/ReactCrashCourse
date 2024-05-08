@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic List Rendering</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+     // Code goes here
+    //  React component rendering the list item
+     function Itemlist({items}){
+        return(
+          <div>
+            {/*check if there are item to display*/}
+            {items.length!=0?(
+              // if items present render them a list
+              <ul>
+                {/* map through each item and render it as a list item*/}
+                {items.map((ele)=>(
+                  <li>{ele}</li>
+                ))}
+                </ul>
+              ):(
+                // if no items present display the message
+                <p>No items Found</p>
+              )
+            }
+            </div>
+        )
+          
+
+     }
+     //Main App component 
+     function App(){
+      //sample list items
+       let items1=["Apple","Ram","Golu"]
+         return(
+             <div>
+                 <Itemlist items={items1}/>
+
+                 </div>
+         )
+     }
+    //  render the app component into root element
+    let root= ReactDOM.createRoot(document.querySelector("#root")).render(<App/>)
+  </script>
+</html>
