@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+    //Main App Component
+    function App(){
+        const [color,setColor]=React.useState('#FFFFFF') // State manage color input value
+        const [isvalid,setVaild]=React.useState(true)  //State manage validity
+        // Function handle input change
+        function handleChange(e){
+            // get input value
+        let inputValue=e.target.value
+        // Regular expressinon match valid Hex value code
+        const hexRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+        // check if the input value matches the Hex color regex
+        if(hexRegex.test(inputValue)){
+            //Update color state and its validit true
+             setColor(inputValue)
+             setVaild(true)
+        }else{
+            setVaild(false)
+        }
+
+        }
+         
+        return(
+            <>
+            <input type="text" placeholder="enter your hex  color" onChange={handleChange}
+            style={{borderColor:isvalid?"red":"black"}}
+            />
+            // Display error message if input invalid
+            {!isvalid && <p style={{ color: 'red' }}>Invalid HEX color code</p>}
+            <div style={{width:"300px",height:"200px",border:"1px solid red",margin:"20px",
+                backgroundColor:color,
+            }}>
+                
+                </div>
+            </>
+        )
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(<App/>)
+      </script>
+</html>
