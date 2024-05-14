@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReactQuize</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+    function Quize(){
+        const questions=[
+            {
+                question:"What is capital of Bihar",
+                option:['Patna','Bhopal','Pune','Ranchi'],
+                correntAnswer:'Patna'
+            },
+            {
+                question:"How many states in Indai",
+                option:[29,30,28,27],
+                correntAnswer:28
+            },
+            {
+                question:"How many Districts in Bihar",
+                option:[30,34,36,38],
+                correntAnswer:38
+            }
+            
+        ]
+        const [selectAnswer,setSelectAnswer]=React.useState(Array(questions.length).fill(''))
+        const [score,setScore]=React.useState(null)
+        console.log(selectAnswer)
+        function handleSelectAnswer(index,answer){
+            const newSelectAnswer=[...selectAnswer]
+            newSelectAnswer[index]=answer
+            setSelectAnswer(newSelectAnswer)
+        
+        }
+         function handleSubmit(){
+          const newscore=selectAnswer.reduce((acc,answer,index)=>{
+          return answer===questions[index].correntAnswer?acc+1:acc;
+          },0);
+          setScore(newscore)
+         }
+        return(
+            <div>
+                {questions.map((ele,index)=>(
+                    <div>
+                        <p>{index+1}.{ele.question}</p>
+                        <ol>
+                            {ele.option.map((op,optionindex)=>(
+                                      <li key={optionindex}>
+                                        <input type="radio"
+                                        name={`questions${index}`}
+                                        value={op}
+                                        checked={selectAnswer[index]===op}
+                                        onChange={()=>handleSelectAnswer(index,op)}
+                                        />
+                                        {op}
+                                        </li>          
+                            )
+                            )}
+                            
+                            </ol>
+                        </div>
+        ))}
+        <button onClick={handleSubmit}>submit</button>
+        <p>TotalScore:{score}</p>
+                </div>
+                
+        )
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(<Quize/>)
+  </script>
+</html>
