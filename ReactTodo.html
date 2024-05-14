@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+
+const { useState }=React
+
+function TodoList() {
+  const [tasks, setTasks] = useState([]);
+  const [taskInput, setTaskInput] = useState('');
+  const [filter, setFilter] = useState('all');
+
+  const addTask = () => {
+    if (taskInput.trim() !== '') {
+      setTasks([...tasks, { text: taskInput, completed: false }]);
+      setTaskInput('');
+    }
+  };
+
+  const toggleTask = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks[index].completed = !updatedTasks[index].completed;
+    setTasks(updatedTasks);
+  };
+
+  const removeTask = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks.splice(index, 1);
+    setTasks(updatedTasks);
+  };
+
+  const filterTasks = (selectedFilter) => {
+    setFilter(selectedFilter);
+  };
+
+  return (
+    <div className="container">
+      <h1>Todo List</h1>
+      <input
+        type="text"
+        value={taskInput}
+        onChange={(e) => setTaskInput(e.target.value)}
+        placeholder="Add new task"
+      />
+      <button onClick={addTask}>Add Task</button>
+      <ul>
+        {tasks.map((task, index) => {
+          if (
+            filter === 'all' ||
+            (filter === 'active' && !task.completed) ||
+            (filter === 'completed' && task.completed)
+          ) {
+            return (
+              <li key={index}>
+                <span className={task.completed ? 'completed' : ''}>
+                  {task.text}
+                </span>
+                <button onClick={() => toggleTask(index)}>
+                  {task.completed ? 'Undo' : 'Done'}
+                </button>
+                <button onClick={() => removeTask(index)}>Remove</button>
+              </li>
+            );
+          }
+          return null;
+        })}
+      </ul>
+      <div>
+        <button onClick={() => filterTasks('all')}>All</button>
+        <button onClick={() => filterTasks('active')}>Active</button>
+        <button onClick={() => filterTasks('completed')}>Completed</button>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<TodoList/>)
+
+  </script>
+</html>
