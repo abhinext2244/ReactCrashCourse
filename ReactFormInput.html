@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your  code will go here
+    function App() {
+        const [hobbies,setHobbies]=React.useState([''])
+        function handleHobby(){
+           setHobbies([...hobbies,''])
+        }
+        function handleChange(index,value){
+          const updatehobbies=[...hobbies]
+          updatehobbies[index]=value
+          setHobbies(updatehobbies)
+        }
+        function handleRemove(index){
+          const updatehobbies=[...hobbies]
+          updatehobbies.splice(index,1)
+          setHobbies(updatehobbies)
+        }
+        function handleSubmit(){
+          console.log(hobbies)
+        }
+      return (
+        <>
+          <form action="" onSubmit={(e)=>e.preventDefault()}>
+            {hobbies.map((hobby,index)=>(
+              <div key={index}>
+                <input
+                type="text" 
+                value={hobby}
+                placeholder="enter your hobbies" 
+                onChange={(e)=>handleChange(index,e.target.value)} />
+                {index>0 && <button onClick={()=>handleRemove(index)}>Remove</button>}
+                </div>
+              ))}
+              <button onClick={handleHobby}>Add Hobby</button>
+              <button onClick={handleSubmit}>submit</button>
+          </form>
+        </>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(<App/>)
+  </script>
+</html>
